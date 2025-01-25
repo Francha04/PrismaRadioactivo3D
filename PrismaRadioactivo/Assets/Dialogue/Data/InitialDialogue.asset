@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c14b959750a314f90386a7cc928a3d, type: 3}
   m_Name: InitialDialogue
   m_EditorClassIdentifier: 
-  _Texto: "Necesito m\xE1s, M\xC1S, \xA1\xA1\xA1\xA1M\xC1S!!!! DENME JAMMERS CON
-    SUE\xD1O"
+  _Texto: "Necesito m\xE1s, M\xC1S, \xA1\xA1M\xC1S!!"
   _AudioVoice: {fileID: 0}
