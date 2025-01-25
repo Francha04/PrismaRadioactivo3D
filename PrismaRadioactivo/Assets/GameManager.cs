@@ -17,8 +17,17 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
     public void GameOver() 
     {
-        SceneManager.SetActiveScene(SceneManager.GetActiveScene());
+        Time.timeScale = 0f;
+        UIManager.Instance.GameLost();
+    }
+    public void UIActivateReloadScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }
