@@ -50,6 +50,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -104,5 +106,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.343371, y: 1.5, z: 20}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 12.82205, y: 1.5, z: 20}
+  m_Center: {x: 0.022472382, y: 0, z: 0}
