@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using UnityEngine.InputSystem;
-using Cinemachine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMovement : MonoBehaviour
@@ -30,11 +28,13 @@ public class PlayerMovement : MonoBehaviour
     BoxCollider myFeetCollider;
 
     float gravityAtStart;
+    public float distToGround;
 
     [Header("CameraShake")]
-    public CameraShake cameraShake;
+    public float cameraShake;
     public float mag = 0.3f;
     public float tims = 0.4f;
+    
 
     void Start()
     {
@@ -42,16 +42,18 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myBodyCollider = GetComponent<BoxCollider>();
         myFeetCollider = GetComponent<BoxCollider>();
-        gravityAtStart = myrigidbody.gravityScale;
     }
 
     // Update is called once per frame
     void Update()
     {
         Run();
-        FlipSprite();
-
-        var dashInput = Input.GetButtonDown("Dash");
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnJump();
+            return;
+        }
+        var dashInput = Input.GetKeyDown(KeyCode.E);
 
         if (dashInput && canDash)
         {
@@ -69,33 +71,27 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing)
         {
             myrigidbody.velocity = dashingDir.normalized * dashingVelocity;
-            StartCoroutine(cameraShake.Shake(tims, mag));
             return;
         }
     }
 
-    void OnMove(InputValue value)
+    
+
+    void OnJump()
     {
-        moveInput = value.Get<Vector2>();
+        if (!IsGrounded()) { return; }
+        myrigidbody.velocity += new Vector3(1f, jumpSpeed, 0f);
+        myAnimator.SetTrigger("IsJumping");
+        
+    }
+    public bool IsGrounded() {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 1.5f);
     }
 
-    void OnJump(InputValue value)
-    {
-        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
-            return;
-        }
-
-        if (value.isPressed)
-        {
-            myrigidbody.velocity += new Vector2(1f, jumpSpeed);
-            myAnimator.SetTrigger("IsJumping");
-        }
-    }
 
     public void Run()
     {
-        Vector2 PlayerVelocity = new Vector2(moveInput.x * runSpeed, myrigidbody.velocity.y);
+        Vector2 PlayerVelocity = new Vector2(1 * runSpeed, myrigidbody.velocity.y);
         myrigidbody.velocity = PlayerVelocity;
 
         bool isMyManJumping = Mathf.Abs(myrigidbody.velocity.y) > Mathf.Epsilon;
@@ -104,22 +100,10 @@ public class PlayerMovement : MonoBehaviour
         myAnimator.SetBool("IsRunning", isMyManRunning);
     }
 
-    void FlipSprite()
-    {
-        bool playerHorizontalSpeed = Mathf.Abs(myrigidbody.velocity.x) > Mathf.Epsilon;
-
-        if (playerHorizontalSpeed)
-        {
-            transform.localScale = new Vector2(Mathf.Sign(myrigidbody.velocity.x), 1f);
-        }
-    }
+  
 
     void JumpCheck()
     {
-        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
-            myAnimator.SetBool("IsJumping", false);
-        }
     }
 
     private IEnumerator StopDashing()
