@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerGroupManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int AmountOfZombiesChildren;
+    public List<GameObject> zombieChildren;
 
-    // Update is called once per frame
-    void Update()
+    public void Start()
     {
-        
+        for (int i = 0; i < zombieChildren.Count; i++)
+        {
+            zombieChildren[i].SetActive(false);
+        }
+    }
+    public void AddZombie() 
+    {
+        AmountOfZombiesChildren++;
+        zombieChildren[AmountOfZombiesChildren - 1].SetActive(true);
     }
 }
