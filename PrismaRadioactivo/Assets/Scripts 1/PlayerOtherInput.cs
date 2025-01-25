@@ -22,6 +22,10 @@ public class PlayerOtherInput : MonoBehaviour
             BController.LaunchBubble();
             StartCoroutine(BubbleCooldown());
         }
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            GameManager.Instance.GameOver();
+        }
     }
     IEnumerator BubbleCooldown()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerCollisionController : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerCollisionController : MonoBehaviour
         {
             coll.HitByBubble();
             thisPlayerGroupM.AddZombie();
+            FollowPlayer.Instance.UpdateCameraSize(thisPlayerGroupM.AmountOfZombiesChildren);
         }
     }
     private void OnTriggerEnter(Collider other)
