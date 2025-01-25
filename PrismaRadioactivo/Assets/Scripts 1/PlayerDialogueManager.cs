@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ public class PlayerDialogueManager : MonoBehaviour
     public float dialogueFadeTime;
     public int dialogueIndex;
     public float DialogueDurationTime;
-    public TextMeshPro ThisText;
+    public TextMesh ThisText;
     public AudioSource ThisSource;
     public static PlayerDialogueManager Instance { get; private set; }
     private void Start()
@@ -43,7 +42,8 @@ public class PlayerDialogueManager : MonoBehaviour
     }
     public void CloseDialogue() 
     {
-        ThisText.DOFade(0f, dialogueFadeTime).OnComplete(()=> { ThisText.text = ""; });
+        //ThisText.DOFade(0f, dialogueFadeTime).OnComplete(()=> { ThisText.text = ""; });
+        ThisText.text = "";
         
     }
 }
