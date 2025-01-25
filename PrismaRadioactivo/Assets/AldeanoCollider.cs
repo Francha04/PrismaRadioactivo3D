@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class AldeanoCollider : MonoBehaviour
 {
-    public void HitByBubble() { }
+    public void HitByBubble() 
+    {
+        this.gameObject.SetActive(false);
+    }
 }

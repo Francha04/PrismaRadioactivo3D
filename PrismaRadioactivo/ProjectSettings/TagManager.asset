@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Aldeano
+  - Bubble
+  - Killzone
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Bubbles
+  - Player
   - 
   - 
   - 
